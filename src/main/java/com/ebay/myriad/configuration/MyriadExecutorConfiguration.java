@@ -15,12 +15,19 @@ public class MyriadExecutorConfiguration {
     @NotEmpty
     private String path;
 
+    @JsonProperty
+    private String user;
+
     public Optional<Double> getJvmMaxMemoryMB() {
         return Optional.fromNullable(jvmMaxMemoryMB);
     }
 
     public String getPath() {
         return path;
+    }
+
+    public String getUser() {
+        return user;
     }
 
 }

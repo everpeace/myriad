@@ -8,6 +8,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.google.protobuf.ByteString;
+import org.apache.commons.lang.StringUtils;
 import org.apache.mesos.Protos;
 import org.apache.mesos.Protos.*;
 import org.apache.mesos.Protos.CommandInfo.URI;
@@ -99,11 +100,16 @@ public interface TaskFactory {
 
             String executorPath = cfg.getMyriadExecutorConfiguration()
                     .getPath();
+            String executorUser = cfg.getMyriadExecutorConfiguration().getUser();
             URI executorURI = URI.newBuilder().setValue(executorPath)
                     .setExecutable(true).build();
 
-            CommandInfo commandInfo = CommandInfo.newBuilder()
-                    .addUris(executorURI).setUser("root")
+            CommandInfo.Builder commandBuilder = CommandInfo.newBuilder();
+            if (StringUtils.isNotEmpty(executorUser)) {
+                commandBuilder.setUser(executorUser);
+            }
+            CommandInfo commandInfo = commandBuilder
+                    .addUris(executorURI)
                     .setValue("export CAPSULE_CACHE_DIR=`pwd`;echo $CAPSULE_CACHE_DIR; java -Dcapsule.log=verbose -jar " + getFileName(executorPath))
                     .build();
 
