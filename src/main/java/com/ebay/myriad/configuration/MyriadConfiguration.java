@@ -43,6 +43,8 @@ public class MyriadConfiguration {
 
     public static final Integer DEFAULT_ZK_TIMEOUT = 20000;
 
+    public static final String DEFAULT_EXECUTOR_DEFAULT_USER = "";
+
     @JsonProperty
     private
     @NotEmpty
@@ -56,6 +58,9 @@ public class MyriadConfiguration {
 
     @JsonProperty
     private String frameworkName;
+
+    @JsonProperty
+    private String executorDefaultUser;
 
     @JsonProperty
     private
@@ -102,6 +107,10 @@ public class MyriadConfiguration {
     public String getFrameworkName() {
         return Strings.isNullOrEmpty(this.frameworkName) ? DEFAULT_FRAMEWORK_NAME
                 : this.frameworkName;
+    }
+
+    public String getExecutorDefaultUser() {
+        return executorDefaultUser != null ? executorDefaultUser : DEFAULT_EXECUTOR_DEFAULT_USER;
     }
 
     public Map<String, Map<String, String>> getProfiles() {

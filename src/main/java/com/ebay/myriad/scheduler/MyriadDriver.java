@@ -39,7 +39,8 @@ public class MyriadDriver {
     @Inject
     public MyriadDriver(final MyriadScheduler scheduler,
                         final MyriadConfiguration cfg, final SchedulerState schedulerState) {
-        Builder frameworkInfoBuilder = FrameworkInfo.newBuilder().setUser("")
+        Builder frameworkInfoBuilder = FrameworkInfo.newBuilder()
+                .setUser(cfg.getExecutorDefaultUser())
                 .setName(cfg.getFrameworkName())
                 .setCheckpoint(cfg.getCheckpoint())
                 .setFailoverTimeout(cfg.getFrameworkFailoverTimeout());
