@@ -23,6 +23,10 @@ frameworkFailoverTimeout: 43200000
 # Myriad's mesos framework name.
 frameworkName: MyriadAlpha
 
+# Default unix username for running Myriad's executor
+# If this field wasn't set, ""(the current user) will be set.
+executorDefaultUser: some_user
+
 # Address of the ZK ensemble (separate by comma, if multiple zk servers are used)
 zkServers: localhost:2181
 
@@ -57,6 +61,8 @@ executor:
   jvmMaxMemoryMB: 256   # Xmx for myriad's executor that launches Node Manager.
   path: file://localhost/usr/local/libexec/mesos/myriad-executor-0.0.1.jar  # Path for the myriad's executor binary.
                                                                             # Also supports, hdfs:// notation.
+  user: some_user       # Unix username for running Myriad's executor
+                        # If the user field and executorDefaultUser were specified, this field takes precedence.
 
 # Environment variables required to launch Node Manager process. Admin can also pass other environment variables to NodeManager.
 yarnEnvironment:
