@@ -2,6 +2,7 @@ mesosMaster: 10.0.2.15:5050
 checkpoint: false
 frameworkFailoverTimeout: 43200000
 frameworkName: MyriadAlpha
+executorDefaultUser:
 nativeLibrary: /usr/local/lib/libmesos.so
 zkServers: localhost:2181
 zkTimeout: 20000
@@ -24,5 +25,6 @@ nodemanager:
 executor:
   jvmMaxMemoryMB: 256
   path: file://localhost/usr/local/libexec/mesos/myriad-executor-0.0.1.jar
+  user: 
 yarnEnvironment:
   YARN_HOME: /usr/local/hadoop
